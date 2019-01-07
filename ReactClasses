@@ -1,0 +1,608 @@
+React Classes.
+===========================
+
+
+class SkiDaysCounter extends Component{
+
+getPercent = decimal => {
+    return decimal * 100 + '%'
+}
+calGoalProcess = (total,goal) => {
+    return this.getPercent(total/goal)
+}
+
+    render(){
+        const {total,power,backCountry,goal} = this.props;
+        return(
+        <section>
+            <div>  <p>Total Days : {total}</p> </div>
+            <div>  <p>Powder : {power}</p> </div>
+            <div>  <p>BackCountry : {backCountry}</p> </div>
+            <div>  <p>Goal : {this.calGoalProcess(total,goal)}</p></div>
+        </section>
+        )
+   }
+        
+    
+}
+
+
+
+render(<SkiDaysCounter total={skiData.total} power={skiData.power} backCountry={skiData.backCountry} goal={skiData.goal}/>, document.getElementById('root'));
+
+
+React Compnents
+===============================
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+
+let skiData = {
+    total : 50,
+    power: 20,
+    backCountry: 10,
+    goal: 100
+}
+
+const getPercent = decimal => {
+    return decimal * 100 + '%'
+}
+const calGoalProcess = (total,goal) => {
+    return getPercent(total/goal)
+}
+
+// const SkiDaysCounter = props => {
+//     return(
+//         <section>
+//             <div>  <p>Total Days : {props.total}</p> </div>
+//             <div>  <p>Powder : {props.power}</p> </div>
+//             <div>  <p>BackCountry : {props.backCountry}</p> </div>
+//             <div>  <p>Goal : {calGoalProcess(props.total,props.goal)}</p></div>
+//         </section>
+//         )
+
+// }
+
+const SkiDaysCounter = ({total,power,backCountry,goal}) => {
+    return(
+        <section>
+            <div>  <p>Total Days : {total}</p> </div>
+            <div>  <p>Powder : {power}</p> </div>
+            <div>  <p>BackCountry : {backCountry}</p> </div>
+            <div>  <p>Goal : {calGoalProcess(total,goal)}</p></div>
+        </section>
+        )
+
+}
+
+
+
+
+
+
+
+
+
+
+
+=======================================================================
+const Book = ({title,author,pages}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+        </ section>
+    )
+}
+
+
+const Library = () => {
+    return(
+    <div>
+        
+        <Book title="Ape Gama" author="Martin Wickramasinghe" pages={300} /> 
+        <br/>
+        <Book title="Ape Gama1" author="Martin Wickramasinghe1" pages={400} />
+        <br/>
+        <Book title="Ape Gama2" author="Martin Wickramasinghe2" pages={500} />
+    </div>)
+}
+
+
+
+
+
+
+render(<Library/>, document.getElementById('root'));
+
+
+
+========================================================================
+
+
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+const Book = ({title,author,pages}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+        </ section>
+    )
+}
+
+
+const Library = ({books}) => {
+    return(
+    <div>
+        {books.map(
+            book =>  <Book title={book.title} author={book.author} pages={book.pages} />
+        )}
+    </div>)
+}
+
+
+========================================================================
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+const Book = ({title,author,pages}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+        </ section>
+    )
+}
+
+
+const Library = ({books,i}) => {
+    return(
+    <div>
+        {books.map(
+            book =>  <Book key={i}  title={book.title} author={book.author} pages={book.pages} />
+        )}
+    </div>)
+}
+render(<Library books={bookList}/>, document.getElementById('root'));
+
+
+===============================================================================
+
+State 
+
+===============================================================================
+
+
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+const Book = ({title,author,pages}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+        </ section>
+    )
+}
+
+class Library extends React.Component{
+    state = {open:false}
+
+    toggleOpenClosed = () => {
+        this.setState(
+            previousState  => ({
+                open:!previousState.open
+            })
+        )
+    }
+
+    render() {
+        const {books} = this.props
+        return (
+            <div>
+                <h1>
+                The Library is {this.state.open ? 'open' : 'closed'}
+                <button onClick={ this.toggleOpenClosed }>Change</button>
+                </h1>
+                {books.map(
+                    (book, i) =>
+                <Book 
+                    key={i}  
+                    title={book.title} 
+                    author={book.author} 
+                    pages={book.pages} />
+                
+                )}
+
+              
+                
+            </div>
+        )
+    }
+}
+
+
+render(<Library books={bookList}/>, document.getElementById('root'));
+
+
+=======================================================================
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+const Book = ({title,author,pages,freeBookMark}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+            <p>Bookmark {freeBookMark ? 'Yes':'No'} </p>
+        </ section>
+    )
+}
+const Hiring = () =>
+    <div>
+        Yes
+    </div>
+
+
+const NotHiring = () => 
+    <div>
+        No
+    </div>
+
+class Library extends React.Component{
+    state = {
+        open:false,
+        freeBookMark : true,
+        hiring : false,
+        data:[]
+    }
+
+    toggleOpenClosed = () => {
+        this.setState(
+            previousState  => ({
+                open:!previousState.open
+            })
+        )
+    }
+
+    componentDidMount(){
+        this.setState({loading:true})
+        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+        .then(data => data.json())
+        .then(data => this.setState({data,loading:false}))
+    }
+
+
+
+
+
+    render() {
+        const {books} = this.props
+        return (
+            <div>
+                <div>
+                    {this.state.loading ? "loading"
+                    :<div>
+                       {this.state.data.map(product => {
+                           return(
+                               <div>
+                                   <h3> Library Product of the week</h3>
+                                   <h4>{product.name}</h4>
+                                   <img src={product.image} height='100px'/>
+                                   </div>
+                           )
+                       })}
+                    </div>
+                    
+                    } 
+                    
+                </div>
+                <h1>
+                The Library is {this.state.open ? 'open' : 'closed'}
+                <p>Status {this.state.hiring ? <Hiring /> : <NotHiring/> }</p>
+                <button onClick={ this.toggleOpenClosed }>Change</button>
+                </h1>
+                {books.map(
+                    (book, i) =>
+                <Book 
+                    key={i}  
+                    title={book.title} 
+                    author={book.author} 
+                    pages={book.pages}
+                    freeBookMark={this.state.freeBookMark}
+                    />
+                
+                )}
+
+              
+                
+            </div>
+        )
+    }
+}
+
+
+render(<Library books={bookList}/>, document.getElementById('root'));
+
+
+============================================================================
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+
+class FavoriteColorForm extends React.Component{
+        state = {value:''}
+
+        newColor = e => 
+            this.setState({value: e.target.value})
+           
+        submit = e => {
+            e.preventDefault()
+            console.log('New Color:'+ this.state.value)
+          
+        }
+
+
+    render() {
+        return(
+        <form onSubmit={this.submit}>
+                    <label> Favorite Color
+                        <input type="color" onChange={this.newColor}/>.
+                    </label>
+                    <button> Submit</button>
+        </form>
+        )
+    }
+
+}
+
+
+render(<FavoriteColorForm/>, document.getElementById('root'));
+
+==================================================================================
+          Forms
+==================================================================================
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+
+class FavoriteColorForm extends React.Component{
+        state = {value:''}
+
+        newColor = e => 
+            this.setState({value: e.target.value})
+           
+        submit = e => {
+            e.preventDefault()
+            console.log('New Color:'+ this.state.value)
+          
+        }
+
+
+    render() {
+        return(
+        <form onSubmit={this.submit}>
+                    <label> Favorite Color
+                        <input type="color" onChange={this.newColor}/>.
+                    </label>
+                    <button> Submit</button>
+        </form>
+        )
+    }
+
+}
+
+
+render(<FavoriteColorForm/>, document.getElementById('root'));
+
+==================================================================================
+         Default Props
+==================================================================================
+
+
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+const Book = ({title,author,pages,freeBookMark}) =>{
+    return(
+        <section>
+            <h1>{title}</h1>
+            <p>Author : {author}</p>
+            <p>Pages : {pages}</p>
+            <p>Bookmark {freeBookMark ? 'Yes':'No'} </p>
+        </ section>
+    )
+}
+const Hiring = () =>
+    <div>
+        Yes
+    </div>
+
+
+const NotHiring = () => 
+    <div>
+        No
+    </div>
+
+class Library extends React.Component{
+
+    static defaultProps = {
+        books:[
+            {"title":"Tahoe Tales ","author":"chamuth","pages":500 }
+        ]
+    }
+
+    state = {
+        open:false,
+        freeBookMark : true,
+        hiring : false,
+        data:[]
+    }
+
+    toggleOpenClosed = () => {
+        this.setState(
+            previousState  => ({
+                open:!previousState.open
+            })
+        )
+    }
+
+    componentDidMount(){
+        this.setState({loading:true})
+        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+        .then(data => data.json())
+        .then(data => this.setState({data,loading:false}))
+    }
+
+
+
+
+
+    render() {
+        const {books} = this.props
+        return (
+            <div>
+                <div>
+                    {this.state.loading ? "loading"
+                    :<div>
+                       {this.state.data.map(product => {
+                           return(
+                               <div>
+                                   <h3> Library Product of the week</h3>
+                                   <h4>{product.name}</h4>
+                                   <img src={product.image} height='100px'/>
+                                   </div>
+                           )
+                       })}
+                    </div>
+                    
+                    } 
+                    
+                </div>
+                <h1>
+                The Library is {this.state.open ? 'open' : 'closed'}
+                <p>Status {this.state.hiring ? <Hiring /> : <NotHiring/> }</p>
+                <button onClick={ this.toggleOpenClosed }>Change</button>
+                </h1>
+                {books.map(
+                    (book, i) =>
+                <Book 
+                    key={i}  
+                    title={book.title} 
+                    author={book.author} 
+                    pages={book.pages}
+                    freeBookMark={this.state.freeBookMark}
+                    />
+                
+                )}
+
+              
+                
+            </div>
+        )
+    }
+}
+
+
+render(<Library books={bookList}/>, document.getElementById('root'));
+
+
