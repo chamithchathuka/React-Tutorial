@@ -1,12 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from 'react';
+import ReactDOM, {render} from 'react-dom';
+import Library from './library';
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+let bookList = [
+    {
+        "title": "Ape Gama",
+        "author": "Martin Wickramasinghe",
+        "pages":300
+    },
+    {
+        "title": "Ape Gama1",
+        "author": "Martin Wickramasinghe1",
+        "pages":600
+    },
+    {
+        "title": "Ape Gama2",
+        "author": "Martin Wickramasinghe2",
+        "pages":400
+    }
+]
+
+render(<Library books={bookList}/>, document.getElementById('root'));
+
